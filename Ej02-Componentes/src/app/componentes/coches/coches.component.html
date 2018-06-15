@@ -1,0 +1,84 @@
+
+<br>  
+
+<div class="row">
+    <div id="mensaje" class="col-xs-12 col-sm-8 offset-sm-2"></div>    
+</div>
+
+
+
+<div  class="row">
+    <div class="col-xs-0 col-sm-2"></div>
+    <div class="col-xs-12 col-sm-8">
+
+        <div class="text-center">
+            <input type="button" id="btnInsertar"  class="btn btn-primary" value="Insertar" (click)="insertar()" />
+            <input type="button" id="btnModificar" class="btn btn-primary" value="Modificar"/>
+            <input type="button" id="btnBorrar"    class="btn btn-danger"  value="Borrar"/>
+            <input type="button" id="btnVaciar"    class="btn btn-warning" value="Vaciar" (click) ="vaciarFormulario()"/>
+            <input type="button" id="btnCancelar"  class="btn btn-warning" value="Cancelar"/>
+        </div>
+
+        <br/>
+
+        <form id="formulario">
+            <div class="form-group row">
+                <label for="marca" class="col-sm-2 col-form-label">Marca</label>
+                <div class="col-sm-10">
+                    <input type="text" name="marca" class="form-control" id="marca" [(ngModel)] = 'coche.marca'/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="modelo" class="col-sm-2 col-form-label">Modelo</label>
+                <div class="col-sm-10">
+                    <input type="text" name="modelo" class="form-control" id="modelo" [(ngModel)] = 'coche.modelo'/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="potencia" class="col-sm-2 col-form-label">Potencia</label>
+                <div class="col-sm-10">
+                    <input type="text" name="potencia" class="form-control" id="potencia" [(ngModel)] = 'coche.potencia'/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="carroceria" class="col-sm-2 col-form-label">Carrocería</label>
+                <div class="col-sm-10">
+                   <select class="form-control" id="carroceria" name="carroceria" [(ngModel)] = 'coche.carroceria' >
+                    <option value="0">Seleccionar...</option>
+                    <option *ngFor="let c of carrocerias" >{{c}}</option>
+
+
+                   </select>
+                </div>
+            </div>
+        </form>  
+            
+        <table class="table table-hover table-striped ">
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Potencia</th>
+                        <th>Carrocería</th>
+                    </tr>
+                </thead>
+                <tbody id="tablacoches">
+                    <tr *ngFor = "let coche of coches" (click)="seleccionarCoche(coche.id)">
+                        <td>{{coche.marca}}</td>
+                        <td>{{coche.modelo}}</td>
+                        <td>{{coche.potencia}}</td>
+                        <td>{{coche.carroceria}}</td>
+            
+                    </tr>
+            
+            
+                </tbody>
+                </table>
+
+
+
+
+    <div class="col-xs-0 col-sm-2"></div>
+</div>
+</div>
+

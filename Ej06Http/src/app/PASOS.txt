@@ -1,0 +1,211 @@
+***********************************************************
+*Crear los componentes                                    *
+***********************************************************
+
+ng generate component componentes/Cabecera
+ng generate component componentes/Menu
+ng generate component componentes/Inicio
+ng generate component componentes/ListadoPeliculas
+ng generate component componentes/FormularioPeliculas
+
+***********************************************************
+*clase Pelicula                                           *
+***********************************************************
+app/entidades/pelicula.ts
+
+export class Pelicula {
+    constructor(public id:number,
+                public titulo:string,
+                public director:string,
+                public genero:string,
+                public year:number ){
+    }
+}
+
+**********************************************************
+*Añadimos el formsModule a AppModule (app.module.ts)     *
+**********************************************************
+
+import { FormsModule } from '@angular/forms';
+...
+imports: [
+    BrowserModule,
+    FormsModule
+],
+
+**********************************************************
+*Añadimos routerModule a AppModule (app.module.ts)       *
+**********************************************************
+
+import { RouterModule } from '@angular/router';
+...
+imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot([])
+],
+
+**********************************************************
+*Añadimos contenido a la plantilla de MenuComponent      *
+**********************************************************
+menu.component.html
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a routerLink="/inicio" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item active">
+            <a [routerLink]="[ 'listadoPeliculas' ]" class="nav-link">Películas</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link">Actores</a>
+        </li>
+    </ul>
+</nav>
+
+************************************************************
+*Definimos las rutas para el router-outlet en AppModule    *
+************************************************************
+imports: [
+    BrowserModule,
+    RouterModule.forRoot([
+      {
+        path : '',
+        component : InicioComponent
+      },
+      {
+        path : 'inicio',
+        component : InicioComponent
+      },
+      {
+        path : 'listadoPeliculas',
+        component : ListadoPeliculasComponent
+      },
+      {
+        path : 'formularioPeliculas',
+        component : FormularioPeliculasComponent
+      }
+    ])
+  ],
+
+************************************************************
+*Contenido de la plantilla de CabeceraComponent            *
+************************************************************
+
+<div class="text-center page-header">
+    <h1>Películas 3000 Mk II</h1>
+</div>    
+
+************************************************************
+*Contenido de la plantilla de InicioComponent              *
+************************************************************
+
+//
+
+************************************************************
+*Contenido de la plantilla de ListadoPeliculasComponent    *
+************************************************************
+
+<br/>
+<h3 class="text-center">
+        Listado de películas
+</h3>
+<br/>
+<div class="row">
+    <div id="mensaje" class="col-md-8 offset-md-2 col-sm-12"></div>    
+</div>
+<div class="row">
+    <div class="col-md-8 offset-md-2 col-sm-12">
+        <div class="text-center">
+            <input type="button" id="btnNuevo"      class="btn btn-primary" value="Nuevo"/>
+            <input type="button" id="btnActualizar" class="btn btn-primary" value="Actualizar"/>
+        </div>
+        <br/>
+        <table class="table table-hover table-striped ">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Director</th>
+                    <th>Género</th>
+                    <th>Año</th>
+                </tr>
+            </thead>
+            <tbody id="tablaPeliculas"></tbody>
+        </table>
+    </div>
+</div>
+
+************************************************************
+*Contenido de la plantilla de FormularioPeliculasComponent *
+************************************************************
+
+<br/>
+<h3 class="text-center">
+  Formulario de películas
+</h3>
+<br/>
+<div class="row">
+  <div id="mensaje" class="col-xs-12 col-sm-8 offset-sm-2"></div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-8 offset-sm-2">
+    <div class="text-center">
+      <input type="button" id="btnInsertar"  class="btn btn-primary" value="Insertar" />
+      <input type="button" id="btnModificar" class="btn btn-primary" value="Modificar" />
+      <input type="button" id="btnBorrar"    class="btn btn-danger"  value="Borrar" />
+      <input type="button" id="btnVaciar"    class="btn btn-warning" value="Vaciar" />
+      <input type="button" id="btnCancelar"  class="btn btn-warning" value="Cancelar" />
+    </div>
+    <br/>
+    <div>
+      <div class="form-group row">
+        <label for="titulo" class="col-sm-2 col-form-label">Título</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="titulo" campo="campo" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="director" class="col-sm-2 col-form-label">Director</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="director" campo="campo" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="genero" class="col-sm-2 col-form-label">Género</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="genero" campo="campo" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="year" class="col-sm-2 col-form-label">Año</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="year" campo="campo" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+* Para el http *
+
+En appModule:
+
+import { HttpClientModule } from '@angular/common/http';
+
+imports: [
+  BrowserModule,
+  FormsModule,
+  HttpClientModule,
+  ...
+
+Donde vayamos a hacer la petición ajax usando HttpClient:
+
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+constructor(private http:HttpClient){
+  ...
+}
+
+
+

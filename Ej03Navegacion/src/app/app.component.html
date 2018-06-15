@@ -1,0 +1,17 @@
+<app-cabecera></app-cabecera>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a routerLink = '/pagina1' class="nav-link" href="#">Página 1</a>
+        </li>
+        <li class="nav-item active">
+            <a [routerLink]="['pagina2','111', '222']" class="nav-link" href="#">Página 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Aquí pondré otro</a>
+        </li>
+    </ul>
+</nav> 
+
+<router-outlet></router-outlet>

@@ -1,0 +1,22 @@
+
+<!-- <div class="container">
+
+    <div class=" row">
+
+        <div class="col-6">
+            <app-padre1></app-padre1>
+        </div>
+        <div class="col-6">
+            <app-padre2></app-padre2>
+        </div>
+      
+      </div>
+</div> -->
+
+<div class="container">
+        <a routerLink = "padre1">Padre 1</a>&nbsp;&nbsp;&nbsp;
+        <a [routerLink]="['/padre2']">Padre 2</a>
+
+</div>
+
+<router-outlet></router-outlet>

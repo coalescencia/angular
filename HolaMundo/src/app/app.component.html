@@ -1,0 +1,26 @@
+<h1>hola mundo</h1>
+
+<h2>qué tal estamos</h2>
+
+<hr>
+<br>
+{{titulo}}
+<br>
+
+Título: {{libro.titulo}}
+<br>
+Autor: {{libro.autor}}
+<br>
+ISBN: {{libro.ISBN}}
+
+Titulo <input id="txtTitulo" type="text" [(ngModel)]="libro.titulo"/>
+
+<hr>
+
+<input type="button" value="DALE" (click) = "botonDalePulsado()">
+
+<hr>
+
+{{funcionNoVoid('COSAS')}}
+
+

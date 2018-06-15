@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Todos los botones
+input[type=button] {
+    margin-left: 10px;    
+} 
+*/
+
+/* solo los de bootstrap */
+.btn {
+    margin-left: 5px;    
+}

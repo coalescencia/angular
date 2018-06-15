@@ -1,0 +1,36 @@
+<h2>Cesta</h2>
+
+<table border="0">
+  <tr>
+    <td>Producto: </td>
+    <td>
+      <input type="text" [(ngModel)]="detalle.producto"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Cantidad</td>
+    <td>
+      <input type="text" [(ngModel)]="detalle.cantidad"/>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <input type="button" value="Añadir" (click)="addDetalle()"/>
+    </td>
+  </tr>
+
+</table>
+
+<br/>
+
+<table border="1" width="200px">
+  <tr>
+    <th>Producto</th>
+    <th>Cantidad</th>
+  </tr>
+  <tr *ngFor="let detalle of detalles">
+    <td>{{detalle.producto}}</td>
+    <td>{{detalle.cantidad}}</td>
+  </tr>  
+</table>
