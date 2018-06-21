@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   public login(usuario: Usuario):Observable<any> {
-    let url = "http://localhost:8000/usuarios/credenciales/?log="+usuario.login+"&pw="+usuario.password;
+    let url = "http://localhost:8000/usuarios/credenciales?login="+usuario.login+"&password="+usuario.password;
     return this.http.get(url);
   }
 

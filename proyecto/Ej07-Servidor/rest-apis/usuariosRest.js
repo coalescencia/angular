@@ -12,6 +12,10 @@ router.get("/", function(request, response) {
 });
 router.get('/usuarios/credenciales/', buscarPorLogin);
 router.post('/usuarios', insertar);
+router.get('/usuarios/listar/', listarUsuarios);
+router.put('/usuarios/:id', modificar);
+//router.delete('/usuarios/:id', borrar);
+router.get('/usuarios/:id', buscarPorId);
 
 exports.router = router;
 
@@ -19,41 +23,73 @@ exports.router = router;
 
 ///////////// Funciones con la lógica de control ////////////////////
 
+let mongo = require('mongodb');
+
 function insertar(request, response) {
+
     let usuario = request.body;
     negocioUsuarios.insertar(usuario)
-        .then(() => response.send("usuario insertado"))        
-        .catch( mensaje => {
-            response.status(400);
-            response.send("Error de validación");
-        });
+    .then( respuesta => {response.json(respuesta)
+    })       
+    .catch( error => {
+        response.status(error.status);
+        response.json(error);        
+    });
 }
 
 function buscarPorLogin(request, response) {
-    let login = request.query.log;
-    let password = request.query.pw;    
-    // la url sería por ejemplo: http://localhost:8000/usuarios/credenciales?log=3&pw=4
+    let login = request.query.login;
+    let password = request.query.password;    
+    console.log(login,password);
+    // la url sería por ejemplo: http://localhost:8000/usuarios/credenciales?login=3&password=4
 
     negocioUsuarios.buscar(login, password).
-        then(function(usuario) {
-            response.json(usuario);    
+        then(function(usuario) {            
+            response.json(usuario);               
         }).
-        catch(function(){
-            response.status(404);
-            response.send("Credenciales incorrectas");  
+        catch(function(error){
+            response.status(error.status);
+            response.json(error);
         });
 
-
-    /*  let usuario = negocioUsuarios.buscar(login, password);     
-     if(usuario != null){
-        response.json(usuario);        
-    } else {
-        response.status(404);
-        response.send("El usuario no existe");        
-    }  */
-        
-
-
-
 }
+
+function listarUsuarios() {
+    negocioUsuarios.listar().
+        then(function(usuarios) {
+            console.log(usuarios);
+        }).
+        catch(function(){
+            console.log("no es posible listar usuarios porque no existen");
+        });
+}
+
+function buscarPorId(request, response) {
+     let id = request.params.id;   
+    negocioUsuarios.buscarPorId(id).
+        then(function(usuario) {
+            response.json(usuario);        
+        }).
+        catch(function(error){
+            console.log(error);
+        })
+
+    }
+
+    function modificar(request, response) {
+        let id = request.params.id;
+        let usuario = request.body;
+        usuario._id = id; // por si acaso no tiene el usuario id me aseguro de ponérselo
+
+        negocioUsuarios.modificar(usuario).
+            then(function() {
+                response.sendStatus(200);
+            })
+            .catch(error => {
+                console.log(error);
+                response.sendStatus(500);
+            });
+    }
+
+
 

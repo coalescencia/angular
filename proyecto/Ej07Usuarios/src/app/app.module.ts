@@ -10,29 +10,12 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { CondicionesComponent } from './componentes/condiciones/condiciones.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { AppRutasModule } from './app.rutas.module';
 
-let rutas = [
-  {
-    path : '',
-    component : LoginComponent
-  },
-  {
-    path : 'login',
-    component : LoginComponent
-  },
-  {
-    path : 'condiciones',
-    component : CondicionesComponent
-  },
-  {
-    path : 'registro',
-    component :RegistroComponent
-  },
-  {
-    path : 'principal',
-    component :PrincipalComponent
-  }
-];
+
+
 
 @NgModule({
   declarations: [
@@ -41,15 +24,19 @@ let rutas = [
     PrincipalComponent,
     LoginComponent,
     RegistroComponent,
-    CondicionesComponent
+    CondicionesComponent,
+    InicioComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(rutas)
+    AppRutasModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 export class Usuario {
-    constructor(public id:number = null,
+    constructor(public _id:string = undefined,
                 public nombre:string = null,               
                 public login:string = null,
                 public password:string = null ){
