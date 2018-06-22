@@ -25,8 +25,9 @@ export class UsuariosService {
       return null;
     }
 
- /*    public buscarUsuario(login:string, password:string):Observable<any>{
-      return this.http.get(this.cfg.url+"/usuarios/credenciales/?log="+login+"&pw="+password);
-    } */
+    public comprobarExisteLogin(login: string):Observable<any> {
+      return this.http.get(this.cfg.url+"/logins/"+login);
+    }
+
 
 }

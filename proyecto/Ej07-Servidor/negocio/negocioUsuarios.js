@@ -75,18 +75,18 @@ exports.buscarPorId = function(id) {
     return bbdd.collection("usuarios").findOne({_id: mongo.ObjectID(id)});
 }
 
-    //aquí validaríamos que sea un usuario correcto
-   /*
-    if(!usuario.nombre || usuario.nombre.trim() == '') {
-        let promesa = new Promise(function(resolve, reject) {
-            let error = {
-                status: 400,
-                texto: "el nombre es obligatorio", 
-                descripcion: "otras cosas"
-            }
-            reject(error);
-        });
-        return promesa;  // esta promesa es recogida en usuarioRest que llama al método insertar
-    }
+exports.buscarLoginExiste = function(login) {
+    return new Promise( function(resolve, reject ) {
+        mongoDBUtil.getConexion().collection("usuarios").findOne({ 'login': login })
+            .then( usr => {       // 'then': la consulta ha ido bien haya o no encontrado usuario
+                if( usr ) {
+                    resolve(usr);
+                } else {
+                    reject({ status: 404, mensaje: "No existe un usuario con ese login, puedes crearlo majo_a" });
+                }
+            }) 
+            .catch( error => { reject ({ status: 500, mensaje: "Uhhhhh, error de servidor, salgan corriendo" } )}) // la consulta no ha funcionado
+    })
+}
 
-    */
+ 

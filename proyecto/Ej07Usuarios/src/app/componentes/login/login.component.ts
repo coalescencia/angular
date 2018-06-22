@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-    console.log("hoasdf");
+  login() {    
     this.loginService.login(this.usuario).  // porque el servicio devuelve un observable
       subscribe( usuario => {
         this.sesionService.add("usuario", usuario);

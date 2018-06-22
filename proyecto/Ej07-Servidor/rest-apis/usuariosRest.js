@@ -16,6 +16,7 @@ router.get('/usuarios/listar/', listarUsuarios);
 router.put('/usuarios/:id', modificar);
 //router.delete('/usuarios/:id', borrar);
 router.get('/usuarios/:id', buscarPorId);
+router.get('/logins/:login', comprobarExisteLogin);
 
 exports.router = router;
 
@@ -38,7 +39,14 @@ function insertar(request, response) {
 }
 
 function buscarPorLogin(request, response) {
-    let login = request.query.login;
+
+    // al pasar por el interceptor se busca la cabecera authentication en la petición.
+    // Se obtiene de la base de datos el usuario y se guarda en el request
+
+    let usuario = request.usuario;
+    response.json(usuario);
+
+   /*  let login = request.query.login;
     let password = request.query.password;    
     console.log(login,password);
     // la url sería por ejemplo: http://localhost:8000/usuarios/credenciales?login=3&password=4
@@ -50,7 +58,7 @@ function buscarPorLogin(request, response) {
         catch(function(error){
             response.status(error.status);
             response.json(error);
-        });
+        }); */
 
 }
 
@@ -88,6 +96,18 @@ function buscarPorId(request, response) {
             .catch(error => {
                 console.log(error);
                 response.sendStatus(500);
+            });
+    }
+
+    function comprobarExisteLogin(request, response) {
+        let login = request.params.login;
+        negocioUsuarios.buscarLoginExiste(login).
+            then(function(usuario) {
+                response.send( { "login": usuario.login})
+            }).
+            catch(function(error) {
+                response.status(error.status);
+                response.json(error);
             });
     }
 
