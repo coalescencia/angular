@@ -29,7 +29,7 @@ app.use(function( request, response, next){
 
     authUtil.basicAuthentication(request, response)
         .then(usuario => {
-            request.usuario = usuario;
+            request.usuario = usuario;  // guardamos el usuario en el request para poder seguir utilizándolo en la aplicación
             next();
         }) 
         .catch( error => {

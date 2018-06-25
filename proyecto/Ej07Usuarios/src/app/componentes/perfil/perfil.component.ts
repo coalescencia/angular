@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../../entidades/usuario';
+import { SesionService } from '../../servicios/sesion.service';
+import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  public usuario: Usuario;
 
-  ngOnInit() {
+  constructor(private sesionService: SesionService, private usuarioService: UsuariosService) { 
+    this.usuario = sesionService.get("usuario");
+}
+ngOnInit() {
+  }
+
+  public guardar():void {
+    this.usuarioService.modificar(this.usuario)
+      .subscribe( resultado => console.log (resultado),
+                  error => console.log(error));
   }
 
 }

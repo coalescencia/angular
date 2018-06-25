@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../entidades/usuario';
 import { ConfiguracionService } from './configuracion.service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ import { ConfiguracionService } from './configuracion.service';
 export class UsuariosService {
 
   constructor(private cfg:ConfiguracionService,
-    private http:HttpClient) { }
+    private http:HttpClient, private loginService: LoginService) { }
 
     public insertar(usuario:Usuario):Observable<any>{
       return this.http.post(this.cfg.url+"/usuarios/", usuario, {responseType: 'text'});
     }
     public modificar(usuario:Usuario):Observable<any>{
-      return null;
+      return this.http.put(this.cfg.url+"/usuarios/"+usuario._id, usuario, {headers: this.loginService.getCabeceraAuth() });
     }
     public borrar(usuario:Usuario):Observable<any>{
       return null;

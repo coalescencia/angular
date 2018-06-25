@@ -12,7 +12,7 @@ exports.basicAuthentication = function(request, response) {
     console.log("Authorization"+authorization);
 
     if(!authorization) {
-        response.sendStatus(403);
+       // response.sendStatus(403);
         return new Promise(function(resolve, reject){
             reject();
         });

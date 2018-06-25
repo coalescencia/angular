@@ -86,16 +86,18 @@ function buscarPorId(request, response) {
 
     function modificar(request, response) {
         let id = request.params.id;
-        let usuario = request.body;
-        usuario._id = id; // por si acaso no tiene el usuario id me aseguro de ponérselo
+        let usuarioBody = request.body;
+        usuarioBody._id = id; // por si acaso no tiene el usuario id me aseguro de ponérselo
 
-        negocioUsuarios.modificar(usuario).
+        negocioUsuarios.modificar(usuarioBody, request.usuario).
+        // comprobamos cogiendo usuarioBody y request.usuario que el usuario que viene en el body es el mismo que manda las credenciales. Es por seguridad, para evitar cambio alguien en la url
             then(function() {
                 response.sendStatus(200);
             })
             .catch(error => {
                 console.log(error);
-                response.sendStatus(500);
+                response.status(error.status);
+                response.json(error);
             });
     }
 

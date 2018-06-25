@@ -52,10 +52,36 @@ exports.insertar = function(usuario) {
 }
 
 
-exports.modificar = function(usuario) {
-    usuario._id = mongo.ObjectID(usuario._id);
-    let bbdd = mongoDBUtil.getConexion();  
-    return bbdd.collection("usuarios").updateOne({ _id: usuario._id},{$set: usuario});
+exports.modificar = function(usuarioAModificar, usuarioQueModifica) {
+    // ver comentarios en usuariosRest por qué recibimos los dos parámetros
+    
+    // autorización. Sólo el usuario y el administrador pueden modificar los datos
+    if(usuarioAModificar._id != usuarioQueModifica._id) {
+        return new Promise( function(resolve, reject){
+            reject( {status: 403, texto: 'No tiene permisos'})
+        });
+    }
+
+
+    // validación
+    if( !usuarioAModificar.nombre || usuarioAModificar.nombre.trim() =='' ||
+        !usuarioAModificar.login || usuarioAModificar.login.trim() == '' ||
+        !usuarioAModificar.password || usuarioAModificar.password.trim() =='' ) {            
+            return new Promise( function(resolve, reject){
+                reject({ status: 400, texto: 'Que te he dicho que datos incorrectos'});
+            });
+    }   
+   
+    usuarioAModificar._id = mongo.ObjectID(usuarioAModificar._id);
+
+    return new Promise( function(resolve, reject) {
+        let bbdd = mongoDBUtil.getConexion();  
+        bbdd.collection("usuarios")
+            .updateOne({ _id: usuarioAModificar._id},{$set: usuarioAModificar })
+        .then( resultado => resolve (resultado))
+        .catch( error => reject({ status: 500, texto: 'Problema de servidor'}));
+
+    })
 }
 
 

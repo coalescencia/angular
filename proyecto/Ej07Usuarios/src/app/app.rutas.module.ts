@@ -19,6 +19,7 @@ let rutasPrincipal = [
     component: PerfilComponent }
 ];
 
+
 let rutas = [
   {
     path : '',
