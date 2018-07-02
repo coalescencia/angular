@@ -1,0 +1,27 @@
+
+<div class="card">
+        <div class="card-header">
+              <h5>{{producto.nombre}}</h5>  
+        </div>
+      <div class="row">
+                <div class="col-2">
+                                <img src="../assets/imagenes/100x100.jpg" alt="">
+                        </div>
+                        <div class="col-8">
+                                <div class="card-body">
+                                        <h6 >Descripción</h6>
+                                        <p class="card-text">{{producto.descripcion | slice:0:300 }}</p>
+                                       Precio:  {{producto.precio}}
+                                       <p></p>
+                                          Categoria:  {{producto.categoria}}
+                                          <p></p>
+                                       <input type="text" [(ngModel)]="detalle.cantidad"> 
+                                       <input type="button" class="btn btn-primary" value="comprar" (click)="comprar()"> 
+                                       <input type="button" class="btn btn-warning" value="borrar" (click)="borrar()"> 
+                                         
+                                 </div>
+                        </div>
+      </div> 
+     
+                        
+</div>

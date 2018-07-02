@@ -1,0 +1,9 @@
+<h3>Cesta</h3>
+
+<button class="btn btn-primary">Comprar</button>
+
+<div *ngFor="let detalle of pedido.getDetalles()">
+   <app-producto [producto]="detalle.producto"></app-producto> 
+  <!-- {{detalle.producto.descripcion}} -->
+  <br>
+</div>

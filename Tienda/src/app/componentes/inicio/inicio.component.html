@@ -1,0 +1,25 @@
+<div class="container">
+
+  <div>
+
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-primary" (click)="buscar()">Buscar</button> 
+      </div>
+      <div class="col-10">
+        <input type="text" class="form-control" placeholder="buscar" [(ngModel)]="categoria" >
+      </div>
+    </div>
+  
+  
+   
+      <div class="col" *ngFor="let p of productos">
+        <app-producto [producto]=p></app-producto><!-- le estamos dando el producto con el @Input en producto.component.ts, el padre es el que use el selector, en este caso inicio -->  
+      </div>
+
+      <div *ngIf="productos.length == 0" class="text-center">
+        <h4 > No hay resultado en la búsqueda</h4>
+      </div>
+  </div>
+
+</div>
