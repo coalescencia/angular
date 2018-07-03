@@ -1,3 +1,23 @@
-<p>
-  compra works!
-</p>
+
+<h3>Confirmación de compra</h3>
+
+<div class="col-2"><h4>Total: {{pedido.total}} €</h4></div>
+
+<div class="col-8">
+
+    <div class="form-group">
+      <label for="fecha">Fecha:</label>
+      <input type="text" class="form-control" id="fecha" [(ngModel)]="pedido.fecha">
+      
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección:</label>
+      <input type="text" class="form-control" id="direccion" [(ngModel)]="pedido.direccion" >
+    </div>
+    <div class="form-group">
+      <label for="tarjeta">tarjeta crédito:</label>
+      <input type="text" class="form-control" id="tarjeta" >
+    </div>
+    <button class="btn btn-primary" (click)="finalizarComprar()">Finalizar</button>
+</div>
+

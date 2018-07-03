@@ -5,10 +5,10 @@ let Producto = require('./producto.js').Producto;
 
 let esquemaPedido = new mongoose.Schema ({
 
-    public codigo: String,
-    public fecha: String,
-    public total: Number,
-    public direccion: String,
+     codigo: String,
+     fecha: String,
+     total: Number,
+     direccion: String,
     usuario: Usuario.schema,
     detalles: [{
                 cantidad: Number,
@@ -19,4 +19,4 @@ let esquemaPedido = new mongoose.Schema ({
 });
 
     // obteniendo el modelo:
-exports.Pedido = mongoose.model('pedidos', esquemaPedidos);
+exports.Pedido = mongoose.model('pedidos', esquemaPedido);

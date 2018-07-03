@@ -11,6 +11,7 @@ import { CondicionesComponent } from './componentes/condiciones/condiciones.comp
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { CestaComponent } from './componentes/cesta/cesta.component';
+import { CompraComponent } from './componentes/compra/compra.component';
 
 let rutasPrincipal = [
   { path: '',
@@ -22,7 +23,10 @@ let rutasPrincipal = [
     component: PerfilComponent },
    {
     path: 'cesta',
-    component: CestaComponent }
+    component: CestaComponent },
+    {
+    path: 'compra',
+    component: CompraComponent }
 ];
 
 

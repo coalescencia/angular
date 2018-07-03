@@ -1,9 +1,11 @@
 <h3>Cesta</h3>
 
-<button class="btn btn-primary">Comprar</button>
+<button class="btn btn-primary" routerLink="/principal/compra">Comprar</button>
 
 <div *ngFor="let detalle of pedido.getDetalles()">
    <app-producto [producto]="detalle.producto"></app-producto> 
   <!-- {{detalle.producto.descripcion}} -->
-  <br>
-</div>
+ </div>
+
+ <div *ngIf="pedido.getDetalles().length == 0">No hay productos en la cesta</div>
+ 
